@@ -1,6 +1,3 @@
-// This is an assignment for students to complete after reading Chapter 3 of
-// "Data Structures and Other Objects Using Java" by Michael Main.
-
 package edu.uwm.cs351;
 
 import java.util.function.Consumer;
@@ -8,18 +5,16 @@ import java.util.function.Consumer;
 import edu.uwm.cs.junit.LockedTestCase;
 
 
-//Jiahui Yang, Comp SCI 351, Homework 8
-//Worked through helper methods with tutors in the tutor room
-//Colloborated with Christian Oropeza on nextInTree
+//Jiahui Yang
+
 /******************************************************************************
- * This class is a homework assignment;
  * An ApptBook ("book" for short) is a sequence of Appointment objects in sorted order.
  * The book can have a special "current element," which is specified and 
  * accessed through four methods that are available in the this class 
  * (start, getCurrent, advance and isCurrent).
  ******************************************************************************/
 public class ApptBook implements Cloneable {
-	// TODO: Declare the private static Node class.
+	//   Declare the private static Node class.
 	// It should have a constructor but no methods.
 	// The constructor should take an Appointment.
 	// The fields of Node should have "default" access (neither public, nor private)
@@ -33,7 +28,7 @@ public class ApptBook implements Cloneable {
 				 data = d;
 			 }
 	}
-	// TODO: Declare the private fields of ApptBook needed for sequences
+	//   Declare the private fields of ApptBook needed for sequences
 	// using a binary search tree.
 	//private fields declared
 	private Node cursor;
@@ -61,7 +56,7 @@ public class ApptBook implements Cloneable {
 		//if r is null given subtree has height no more than a given bound so return true
 		if (r == null) return true;
 		//calling itself decrementing max checking left subtree and right subtree, decrement max
-		return checkHeight(r.left, max - 1) && checkHeight(r.right, max - 1); //TODO
+		return checkHeight(r.left, max - 1) && checkHeight(r.right, max - 1); // 
 	}
 	
 	
@@ -74,7 +69,7 @@ public class ApptBook implements Cloneable {
 		//base case for if r is null just return 0 because there is nothing in the tree
 		if (r == null) return 0;
 		//return the amount of nodes on the right side added by the amound of nodes on the left side then add one to account for root
-		return countNodes(r.right) + countNodes(r.left) + 1; // TODO
+		return countNodes(r.right) + countNodes(r.left) + 1; //  
 	}
 	
 	/**
@@ -95,7 +90,7 @@ public class ApptBook implements Cloneable {
 		//if hi isn't null and nodes data is after the given range or exactly the hi, then report
 		if (hi != null && r.data.compareTo(hi)>=0) return report("Node after range");
 		//recursive call on itself with different node being passed in each time going through the left and right of tree
-		return allInRange(r.left, lo, r.data) && allInRange(r.right, r.data, hi);// TODO
+		return allInRange(r.left, lo, r.data) && allInRange(r.right, r.data, hi);//  
 	}
 	
 	/**
@@ -117,7 +112,7 @@ public class ApptBook implements Cloneable {
 		//return recursive call checking the right side of the tree to see if the cursor is on that side
 		//then check if the cursor is on the left side
 		return foundCursor(r.right) || foundCursor(r.left);
-		 // TODO
+		 //  
 	}
 
 	
@@ -132,7 +127,7 @@ public class ApptBook implements Cloneable {
 		// Implementation:
 		// Do multiple checks: each time returning false if a problem is found.
 		// (Use "report" to give a descriptive report while returning false.)
-		// TODO: Use helper methods to do all the work.
+		//   Use helper methods to do all the work.
 		
 		//if the checkHeight doesn't return true return report
 		if (checkHeight(root, manyItems) != true) return report("height not bounded by number of items");
@@ -155,7 +150,7 @@ public class ApptBook implements Cloneable {
 	//default constructor
 	public ApptBook( )
 	{
-		// TODO: Implemented by student.
+		//   Implemented by student.
 		manyItems = 0;
 		cursor = null;
 		root = null;
@@ -171,7 +166,7 @@ public class ApptBook implements Cloneable {
 		//return manyitems
 		assert wellFormed() : "invariant failed at start of size";
 		return manyItems;
-		// TODO: Implemented by student.
+		//   Implemented by student.
 	
 	
 	}
@@ -191,7 +186,7 @@ public class ApptBook implements Cloneable {
 		if (r.left != null) return firstInTree(r.left);
 		//return r r.left is null
 		return r;
-		 // TODO: non-recursive is fine
+		 //   non-recursive is fine
 	}
 	
 	/**
@@ -206,7 +201,7 @@ public class ApptBook implements Cloneable {
 		//set cursor to the node most left
 		assert wellFormed() : "invariant failed at start of start";
 		cursor = firstInTree(root);
-		// TODO: Implemented by student.
+		//   Implemented by student.
 		assert wellFormed() : "invariant failed at end of start";
 	}
 
@@ -222,7 +217,7 @@ public class ApptBook implements Cloneable {
 		//return is cursor is null or not
 		assert wellFormed() : "invariant failed at start of isCurrent";
 		return cursor != null;
-		// TODO: Implemented by student.
+		//   Implemented by student.
 		
 	}
 
@@ -242,7 +237,7 @@ public class ApptBook implements Cloneable {
 		assert wellFormed() : "invariant failed at start of getCurrent";
 		if (!isCurrent()) throw new IllegalStateException("no current");
 		return cursor.data;
-		// TODO: Implemented by student.
+		//   Implemented by student.
 	}
 
 	/**
@@ -267,7 +262,7 @@ public class ApptBook implements Cloneable {
 		else if (r.data.compareTo(appt)>0) return nextInTree(r.left, appt,acceptEquivalent, alt = r);
 		//if nodes data comes after the appt, use recursion to call itself going to the right subtree
 		else return nextInTree(r.right, appt,acceptEquivalent, alt);		
-		// TODO: recursion not required, but is simpler
+		//   recursion not required, but is simpler
 	}
 	
 	/**
@@ -293,13 +288,12 @@ public class ApptBook implements Cloneable {
 		if (cursor.right != null) cursor = nextInTree(cursor.right, cursor.data, true, null);	
 		//if cursor doesn't have a right subtree, then set cursor to the ancestor that comes after it
 		else cursor = nextInTree(root, cursor.data, false, null);
-		// TODO: See homework description.
 		// firstInTree and nextInTree are useful.
 		assert wellFormed() : "invariant failed at end of advance";
 	}
 	/**
 	 * Remove the current element from this book.
-	 * NB: Not supported in Homework #8
+
 	 **/
 	public void removeCurrent( )
 	{
@@ -319,7 +313,7 @@ public class ApptBook implements Cloneable {
 		if (guide == null) throw new NullPointerException();
 		//set the cursor to the node that has the same data as guide appointment or the one closest
 		cursor = nextInTree(root, guide, true, null);
-		// TODO: Use nextInTree helper method
+		//   Use nextInTree helper method
 		assert wellFormed() : "invariant failed at end of setCurrent";
 	}
 
@@ -353,11 +347,11 @@ public class ApptBook implements Cloneable {
 		root = insertH(root, element);
 		//increment manyItems
 		manyItems++;
-		// TODO: Implemented by student.
+		//   Implemented by student.
 		assert wellFormed() : "invariant failed at end of insert";
 	}
 
-	// TODO: recursive helper method for insertAll.  
+	//   recursive helper method for insertAll.  
 	// - Must be recursive.
 	// - Must add in "pre-order"
 	//takes node as a paramater and returns void
@@ -393,14 +387,14 @@ public class ApptBook implements Cloneable {
 		if(addend == this) addend = addend.clone();
 		//uses insert all helper to add to the BST
 		insertAllH(addend.root);
-		// TODO: Implemented by student.
+		//   Implemented by student.
 		// Watch out for the this==addend case!
 		// Cloning the addend is an easy way to avoid problems.
 		assert wellFormed() : "invariant failed at end of insertAll";
 		assert addend.wellFormed() : "invariant of addend broken in insertAll";
 	}
 
-	// TODO: private recursive helper method for clone.
+	//   private recursive helper method for clone.
 	// - Must be recursive
 	// - Take the answer as a parameter so you can set the cloned cursor
 	//https://interview.hackingnote.com/en/problems/clone-binary-tree
@@ -442,7 +436,7 @@ public class ApptBook implements Cloneable {
 			("This class does not implement Cloneable");
 		}
 	
-		// TODO: copy the structure (use helper method)
+		//   copy the structure (use helper method)
 		//call helper method that starts at root
 		cloneH(root, answer);
 		assert wellFormed() : "invariant failed at end of clone";
